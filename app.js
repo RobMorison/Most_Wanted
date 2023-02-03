@@ -121,11 +121,11 @@ function searchByName(people) {
  * to the user in the form of an alert().
  * @param {Array} people        A collection of person objects.
  */
-function displayPeople(people) {
+function displayPeople(people, type) {
     alert(
         people
             .map(function (person) {
-                return `${person.firstName} ${person.lastName}`;
+                return `relationship ${type}: ${person.firstName} ${person.lastName}`;
             })
             .join("\n")
     );
@@ -191,3 +191,28 @@ function chars(input) {
 
 //////////////////////////////////////////* End Of Starter Code *//////////////////////////////////////////
 // Any additional functions can be written below this line 👇. Happy Coding! 😁
+
+function findPersonFamily(person, people) {
+   let spouse = findSpouce(person, people);
+   if (spouse != null) {
+    displayPeople(spouse,"spouse")
+   }
+        // let personFamily = 'This person does not have a spouse.';
+        //     return personFamily;
+        }
+            // Restarts app() from the very beginning
+        // return app(people);
+
+
+
+function findSpouce(person,people){
+    if (person.currentSpouse != null) {
+        let currentSpouse = people.filter(function(element){
+            if(element.id === person.currentSpouse){
+                return true;
+            }
+        });
+       return currentSpouse
+        
+    }
+}
