@@ -193,7 +193,7 @@ function chars(input) {
 // Any additional functions can be written below this line 👇. Happy Coding! 😁
 
 function findPersonFamily(person, people) {
-   let spouse = findSpouce(person, people);
+   let spouse = findSpouse(person, people);
    if (spouse != null) {
     displayPeople(spouse,"spouse")
    }
@@ -205,7 +205,7 @@ function findPersonFamily(person, people) {
 
 
 
-function findSpouce(person,people){
+function findSpouse(person,people){
     if (person.currentSpouse != null) {
         let currentSpouse = people.filter(function(element){
             if(element.id === person.currentSpouse){
@@ -214,5 +214,7 @@ function findSpouce(person,people){
         });
        return currentSpouse
         
-    }
+    }else{
+        alert('This person does not have a spouse.');
+       }
 }
