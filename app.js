@@ -205,7 +205,7 @@ function findPersonFamily(person, people) {
 
 
 
-function findSpouse(person,people){
+function findSpouse(person, people){
     if (person.currentSpouse != null) {
         let currentSpouse = people.filter(function(element){
             if(element.id === person.currentSpouse){
@@ -217,4 +217,24 @@ function findSpouse(person,people){
     }else{
         alert('This person does not have a spouse.');
        }
+}
+
+function findPersonDescendants(person, people) {
+    // Find children
+    let foundChildren = people.filter(function(element){
+        if(element.parents.includes(person.id)){
+            return true
+        }
+    })
+    let descendants = foundChildren;
+    if (descendants.length === 0){
+        alert('This person does not have any descendants.')
+        return descendants;
+    }
+        for (let i = 0; i < foundChildren.length; i++){
+            let descendants = descendants.concat(findPersonDescendants(foundChildren[i],people))
+            return descendants
+        }
+        displayPeople(descendants)
+    return descendants;
 }
