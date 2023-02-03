@@ -79,7 +79,7 @@ function mainMenu(person, people) {
             //! TODO #3: Declare a findPersonDescendants function //////////////////////////////////////////
             // HINT: Review recursion lecture + demo for bonus user story
             let personDescendants = findPersonDescendants(person[0], people);
-            alert(personDescendants);
+            displayPeople(personDescendants, "descendants")
             break;
         case "restart":
             // Restart app() from the very beginning
@@ -219,22 +219,42 @@ function findSpouse(person, people){
        }
 }
 
-function findPersonDescendants(person, people) {
-    // Find children
+
+function findChildren(person,people){
     let foundChildren = people.filter(function(element){
         if(element.parents.includes(person.id)){
             return true
         }
     })
-    let descendants = foundChildren;
-    if (descendants.length === 0){
-        alert('This person does not have any descendants.')
-        return descendants;
-    }
-        for (let i = 0; i < foundChildren.length; i++){
-            let descendants = descendants.concat(findPersonDescendants(foundChildren[i],people))
-            return descendants
-        }
-        displayPeople(descendants)
+    return foundChildren
+}
+
+// function findPersonDescendants(person, people) {
+//     // Find children
+//     let  children = findChildren(person,people)
+    
+//     let descendants = children;
+//     if (descendants.length === 0){
+//         alert('This person does not have any descendants.')
+//         return descendants;
+//     }else {
+//        for (let i = 0; i < children.length; i++){
+//             descendants.concat(findChildren(children[i],people))
+//         }
+//         displayPeople(descendants, 'Descendants') 
+//     }
+        
+//     return descendants;
+// }
+function findPersonDescendants(person,people,descendants=[]){
+    let array = people.filter(function(el){
+        return el.parents.includes(person.id);
+    });
+    if(array.length === 0) return [person]
+    descendants = [person];
+
+    array.forEach((person) => {
+        descendants = [...descendants, ...findPersonDescendants(person, people)]
+    });
     return descendants;
 }
