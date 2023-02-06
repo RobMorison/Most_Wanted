@@ -229,23 +229,7 @@ function findChildren(person,people){
     return foundChildren
 }
 
-// function findPersonDescendants(person, people) {
-//     // Find children
-//     let  children = findChildren(person,people)
-    
-//     let descendants = children;
-//     if (descendants.length === 0){
-//         alert('This person does not have any descendants.')
-//         return descendants;
-//     }else {
-//        for (let i = 0; i < children.length; i++){
-//             descendants.concat(findChildren(children[i],people))
-//         }
-//         displayPeople(descendants, 'Descendants') 
-//     }
-        
-//     return descendants;
-// }
+
 function findPersonDescendants(person,people,descendants=[]){
     // finds our children
     let arrayOfChildren = people.filter(function(el){
@@ -264,13 +248,41 @@ function findPersonDescendants(person,people,descendants=[]){
 }
 
 function searchByTraits(people){
-    let foundItems = searchBySingleTrait(people);
-    displayPeople(foundItems, "Trait")
+    let searchType = promptFor(
+        "Do you want to search by multiple traits? 'yes' or 'no'",
+        yesNo
+    ).toLowerCase()
+    let searchResults;
+    switch (searchType){
+        case "yes":
+            searchResults = searchByMultipleTraits(people);
+            break;
+        case  "no":
+            searchResults = searchBySingleTrait(people);
+            displayPeople(searchBySingleTrait, "Response");
+            break;
+        default:
+            app(people);
+            break;
+    }
 }
 
-function searchBySingleTrait(people){
-    let userInputProp = prompt("Enter property: ");
-    let userInputVal = prompt("Enter value: ");
+// {
+//     let foundItems = searchBySingleTrait(people);
+//     displayPeople(foundItems, "Response")
+// }
+
+function searchBySingleTrait(person, people) {
+    let trait = findSingleTrait(person, people);
+    if (trait != null) {
+     displayPeople(trait,"Response")
+    }
+}
+
+
+function findSingleTrait(people){
+    let userInputProp = prompt("Enter search property: ");
+    let userInputVal = prompt("Enter search value: ");
     let foundItems = people.filter(function(el){
         try{
             if(el[userInputProp].includes(userInputVal)){
@@ -288,4 +300,14 @@ function searchBySingleTrait(people){
     return foundItems;
 
 }
+
+// function searchbyEyeColor(people){
+//     let userInput = prompt('Please enter an eye color to search by: ');
+//     let foundPeople = people.filter(function(people){
+//         if (people.eyeColor.includes(userInput)){
+//             return true;
+//         }
+//     });
+//     console.log(foundPeople)
+// }
 
