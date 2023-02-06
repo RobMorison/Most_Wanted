@@ -259,7 +259,6 @@ function searchByTraits(people){
             break;
         case  "no":
             searchResults = searchBySingleTrait(people);
-            displayPeople(searchBySingleTrait, "Response");
             break;
         default:
             app(people);
@@ -281,11 +280,11 @@ function searchBySingleTrait(person, people) {
 
 
 function findSingleTrait(people){
-    let userInputProp = prompt("Enter search property: ");
+    let userInputProp = prompt("Enter search property: 'firstName', 'lastName', 'gender', 'dob', 'height', 'weight', 'eyeColor', 'occupation', 'parents', 'currentSpouse' ");
     let userInputVal = prompt("Enter search value: ");
     let foundItems = people.filter(function(el){
         try{
-            if(el[userInputProp].includes(userInputVal)){
+            if(el[userInputProp] === (userInputVal)){
                 return true;
             }
         } catch (error) {
@@ -311,3 +310,20 @@ function findSingleTrait(people){
 //     console.log(foundPeople)
 // }
 
+function searchByMultipleTraits(people) {
+    let results = findSingleTrait(people)
+    while (results.length > 1){
+        let userInput = prompt("Would you like to narrow your search more?: 'yes' or 'no'")
+        if (userInput = 'yes');{
+            let foundItems = findSingleTrait(results);
+            return foundItems
+            }}
+
+    // while loop, ask the user if they would like to search again
+    // if they want to search again call findSingleTrait(results) pass in results rather than the full list of people
+    }
+
+
+function findMultipleTraits(people){
+
+}
