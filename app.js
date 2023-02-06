@@ -125,7 +125,7 @@ function displayPeople(people, type) {
     alert(
         people
             .map(function (person) {
-                return `relationship ${type}: ${person.firstName} ${person.lastName}`;
+                return `${type}: ${person.firstName} ${person.lastName}`;
             })
             .join("\n")
     );
@@ -264,6 +264,11 @@ function findPersonDescendants(person,people,descendants=[]){
 }
 
 function searchByTraits(people){
+    let foundItems = searchBySingleTrait(people);
+    displayPeople(foundItems, "Trait")
+}
+
+function searchBySingleTrait(people){
     let userInputProp = prompt("Enter property: ");
     let userInputVal = prompt("Enter value: ");
     let foundItems = people.filter(function(el){
@@ -281,5 +286,6 @@ function searchByTraits(people){
         }
     })
     return foundItems;
+
 }
-displayPeople(foundItems, userInputProp);
+
