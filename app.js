@@ -247,14 +247,39 @@ function findChildren(person,people){
 //     return descendants;
 // }
 function findPersonDescendants(person,people,descendants=[]){
-    let array = people.filter(function(el){
+    // finds our children
+    let arrayOfChildren = people.filter(function(el){
         return el.parents.includes(person.id);
     });
-    if(array.length === 0) return [person]
+    // checks to see if there was results
+    if(arrayOfChildren.length === 0) return [person]
     descendants = [person];
-
-    array.forEach((person) => {
+    // for looping over the results from above, now we are looking for grandchildren
+    arrayOfChildren.forEach((person) => {
+        // ... is called a spread operator, we are using it to hold onto the existing value of descendants 
+        // the below logic prevents us from overwriting it with the new results 
         descendants = [...descendants, ...findPersonDescendants(person, people)]
     });
     return descendants;
 }
+
+function searchByTraits(people){
+    let userInputProp = prompt("Enter property: ");
+    let userInputVal = prompt("Enter value: ");
+    let foundItems = people.filter(function(el){
+        try{
+            if(el[userInputProp].includes(userInputVal)){
+                return true;
+            }
+        } catch (error) {
+            console.log(error);
+        }
+        finally{
+            if(el[userInputProp] === parseInt(userInputVal)){
+                return true
+            }
+        }
+    })
+    return foundItems;
+}
+displayPeople(foundItems, userInputProp);
