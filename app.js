@@ -292,7 +292,7 @@ function findSingleTrait(people){
         }
         finally{
             if(el[userInputProp] === parseInt(userInputVal)){
-                return true
+                return true;
             }
         }
     })
@@ -314,16 +314,15 @@ function searchByMultipleTraits(people) {
     let results = findSingleTrait(people)
     while (results.length > 1){
         let userInput = prompt("Would you like to narrow your search more?: 'yes' or 'no'")
-        if (userInput = 'yes');{
-            let foundItems = findSingleTrait(results);
-            return foundItems
-            }}
-
+        if (userInput === 'yes'){
+            results = findSingleTrait(results);
+           }
+        else if (userInput === 'no'){
+            break;
+           }
+        }
+        return results
     // while loop, ask the user if they would like to search again
     // if they want to search again call findSingleTrait(results) pass in results rather than the full list of people
     }
 
-
-function findMultipleTraits(people){
-
-}
