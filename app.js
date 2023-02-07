@@ -73,7 +73,7 @@ function mainMenu(person, people) {
             //! TODO #2: Declare a findPersonFamily function //////////////////////////////////////////
             // HINT: Look for a people-collection stringifier utility function to help
             let personFamily = findPersonFamily(person[0], people);
-            alert(personFamily);
+            displayPeople(personFamily, 'Spouse');
             break;
         case "descendants":
             //! TODO #3: Declare a findPersonDescendants function //////////////////////////////////////////
@@ -195,13 +195,10 @@ function chars(input) {
 function findPersonFamily(person, people) {
    let spouse = findSpouse(person, people);
    if (spouse != null) {
-    displayPeople(spouse,"spouse")
-   }
-        // let personFamily = 'This person does not have a spouse.';
-        //     return personFamily;
-        }
-            // Restarts app() from the very beginning
-        // return app(people);
+    return spouse
+       }
+}
+
 
 
 
@@ -217,8 +214,6 @@ function findSpouse(person, people){
     }else{
         alert('This person does not have a spouse.');
        }
-    
-    return foundItems
 }
 
 
