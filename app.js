@@ -148,7 +148,7 @@ function displayPerson(person) {
     personInfo += `Occupation: ${person.occupation}\n`;
     
     //! TODO #1a: finish getting the rest of the information to display //////////////////////////////////////////
-    alert(personInfo);
+    return(personInfo);
 }
 // End of displayPerson()
 
@@ -256,6 +256,8 @@ function searchByTraits(people){
     switch (searchType){
         case "yes":
             searchResults = searchByMultipleTraits(people);
+            let personInfo = displayPerson(searchResults[0]);
+            alert(personInfo);
             break;
         case  "no":
             searchResults = searchBySingleTrait(people);
@@ -274,7 +276,8 @@ function searchByTraits(people){
 function searchBySingleTrait(person, people) {
     let trait = findSingleTrait(person, people);
     if (trait != null) {
-     displayPeople(trait,"Response")
+        let personInfo = displayPerson(trait[0]);
+        alert(personInfo);
     }
 }
 
@@ -300,15 +303,6 @@ function findSingleTrait(people){
 
 }
 
-// function searchbyEyeColor(people){
-//     let userInput = prompt('Please enter an eye color to search by: ');
-//     let foundPeople = people.filter(function(people){
-//         if (people.eyeColor.includes(userInput)){
-//             return true;
-//         }
-//     });
-//     console.log(foundPeople)
-// }
 
 function searchByMultipleTraits(people) {
     let results = findSingleTrait(people)
