@@ -217,6 +217,8 @@ function findSpouse(person, people){
     }else{
         alert('This person does not have a spouse.');
        }
+    
+    return foundItems
 }
 
 
@@ -266,6 +268,7 @@ function searchByTraits(people){
             app(people);
             break;
     }
+    return searchResults
 }
 
 // {
@@ -279,6 +282,7 @@ function searchBySingleTrait(person, people) {
         let personInfo = displayPerson(trait[0]);
         alert(personInfo);
     }
+    return foundItems
 }
 
 
